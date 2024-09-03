@@ -6,7 +6,7 @@ class Job {
   Job({required this.id, required this.name, required this.percentage});
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is Job && runtimeType == other.runtimeType && name == other.name;
+  bool operator ==(Object other) => identical(this, other) || other is Job && runtimeType == other.runtimeType && id == other.id;
 
   @override
   int get hashCode => name.hashCode;

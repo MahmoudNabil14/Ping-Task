@@ -20,40 +20,42 @@ class JobListScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                ListView.builder(
-                  itemCount: jobProvider.jobs.length,
-                  itemBuilder: (context, index) {
-                    final job = jobProvider.jobs[index];
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Checkbox(value: jobProvider.selectedJobs.contains(job), onChanged: (value) {}),
-                        Text('${job.name} (${job.percentage}%)'),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                jobProvider.addJob(job);
-                              },
-                              icon: const Icon(Icons.add),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                jobProvider.removeJob(job);
-                              },
-                              icon: const Icon(Icons.remove),
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: jobProvider.jobs.length,
+                    itemBuilder: (context, index) {
+                      final job = jobProvider.jobs[index];
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Checkbox(value: jobProvider.selectedJobs.contains(job), onChanged: (value) {}),
+                          Text('${job.name} (${job.percentage}%)'),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  jobProvider.addJob(job);
+                                },
+                                icon: const Icon(Icons.add),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  jobProvider.removeJob(job);
+                                },
+                                icon: const Icon(Icons.remove),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const SelectedJobsScreen(),
+                      builder: (context) => SelectedJobsScreen(selectedJobs: jobProvider.selectedJobs,),
                     ));
                   },
                   child: const Text('View Selected Jobs'),
